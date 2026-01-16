@@ -1,0 +1,25 @@
+version: 2
+
+services:
+  - type: web
+    name: cinepro-backend
+    env: node
+    plan: free
+    branch: main
+
+    # Install dependencies
+    buildCommand: "npm install"
+
+    # Start production server
+    startCommand: |
+      export PORT=${PORT}
+      npm run main
+
+    envVars:
+      - key: NODE_ENV
+        value: "production"
+      # If CinePro uses other env vars like a TMDB key or debug flags:
+      - key: TMDB_API_KEY
+        value: ""
+      - key: DEBUG
+        value: "off"
